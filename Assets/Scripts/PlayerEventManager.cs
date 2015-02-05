@@ -3,37 +3,64 @@ using System.Collections;
 
 public class PlayerEventManager : MonoBehaviour {
 
-	public delegate void OnFire();
-	public static event OnFire onFireEvent;
+	public delegate void OnButton();
+	public static event OnButton onButtonEvent;
+	public delegate void OnTarget(Vector3 position);
+	public static event OnTarget onTargetEvent;
 	public delegate void OnPose();
 	public static event OnPose onPoseEvent;
-	public delegate void OnTarget();
-	public static event OnPose onTargetEvent;
 	public delegate void OnTargetExit();
-	public static event OnPose onTargetExitEvent;
-
+	public static event OnTargetExit onTargetExitEvent;
+	public float camRayLength = 5;  
 
 
 	void Update()
 	{
-		if(Input.GetButtonDown("Fire1") && Input.GetKey(KeyCode.LeftShift))
+		Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+		Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * camRayLength, Color.red);
+		// Create a RaycastHit variable to store information about what was hit by the ray.
+		RaycastHit hit;
+		// Perform the raycast and if it hits something on the floor layer...
+		if(Physics.Raycast (ray, out hit, camRayLength))
 		{
-			onPoseEvent();
+			if(Input.GetKey(KeyCode.LeftShift) && Input.GetButtonDown("Fire1"))
+			{
+				onPoseEvent();
+			}
+			else if(Input.GetButtonDown("Fire1"))
+			{
+				FireCondition(hit);
+			}
+			else if(Input.GetKey(KeyCode.LeftShift))
+			{
+				TargetCondition(hit);
+			}
+			else if(Input.GetKeyUp(KeyCode.LeftShift))
+			{
+				onTargetExitEvent();
+			}
 		}
-		else if(Input.GetKey(KeyCode.LeftShift))
-		{
-			onTargetEvent();
-		}
-		else if(Input.GetButtonDown("Fire1"))
-		{
-			onFireEvent();
-		}
-		else if(Input.GetKeyUp(KeyCode.LeftShift))
+		else
 		{
 			onTargetExitEvent();
 		}
 	}
 
+	void FireCondition(RaycastHit hit)
+	{
+		if(hit.collider.gameObject.tag == "Button")
+			onButtonEvent();
+	}
 
-	
+	void TargetCondition(RaycastHit hit)
+	{
+		if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Floor"))
+		{
+			onTargetEvent(hit.point);
+		}
+		else
+		{
+			onTargetExitEvent();
+		}
+	}
 }

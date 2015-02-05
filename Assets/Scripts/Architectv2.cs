@@ -286,8 +286,6 @@ public class Architectv2 : MonoBehaviour {
 		int size = rules.Length;
 		int otherSize = otherRules.Length;
 		int r = 0;
-		Rules[] buff = new Rules[otherSize];
-		Rules[] otherBuff = new Rules[size];
 		int big = 0;
 		if(size <= otherSize)
 		{

@@ -4,9 +4,11 @@ using System.Collections;
 public class Mignon : MonoBehaviour {
 
 	public GameObject obj;
+	public float reloadTime = 1f;
 	private NavMeshAgent nav;
 	private bool occupied;
 	private GameObject target;
+	private float time;
 
 	void Awake()
 	{
@@ -17,16 +19,20 @@ public class Mignon : MonoBehaviour {
 
 	void Update()
 	{
+		time += Time.deltaTime;
 		if(!occupied)
 		{
 			FindNextTarget();
 		}
-		else if(Vector3.Distance(transform.position, target.transform.position) <= 1.5)
+		else if(nav.remainingDistance <= 1.5)
 		{
-
-			Instantiate(obj, target.transform.position, target.transform.rotation);
-			Destroy(target);
-			occupied = false;
+			if(time >= reloadTime)
+			{
+				Instantiate(obj, target.transform.position, target.transform.rotation);
+				Destroy(target);
+				occupied = false;
+				time = 0;
+			}
 		}
 	}
 
@@ -34,6 +40,7 @@ public class Mignon : MonoBehaviour {
 	{
 		GameObject[] targets = GameObject.FindGameObjectsWithTag("Pattern");
 		float minDistance = 10000f;
+		target = null;
 		if(targets.Length > 0)
 		{
 			for(int i=0; i<targets.Length; i++)
@@ -41,12 +48,19 @@ public class Mignon : MonoBehaviour {
 				float d = Vector3.Distance(targets[i].transform.position, transform.position);
 				if(d < minDistance)
 				{
-					minDistance = d;
-					target = targets[i];
+					if(!targets[i].GetComponent<Tile>().choosen)
+					{
+						minDistance = d;
+						target = targets[i];
+					}
 				}
 			}
-			nav.destination = target.transform.position;
-			occupied = true;
+			if(target != null)
+			{
+				nav.destination = target.transform.position;
+				occupied = true;
+				target.GetComponent<Tile>().choosen = true;
+			}
 		}
 	}
 

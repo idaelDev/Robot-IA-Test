@@ -12,15 +12,21 @@ public class Invokator : MonoBehaviour
 	{
 		anim = GetComponentInChildren<Animator>();
 		particle = GetComponentInChildren<ParticleSystem>();
+		PlayerEventManager.onButtonEvent += Button;
+	}
+
+	void Button()
+	{
+		StartCoroutine(Activate());
 	}
 	
 	public IEnumerator Activate()
 	{
 		anim.SetTrigger("Pressed");
-//		WaitForSeconds(0.5f);
+		yield return new WaitForSeconds(0.5f);
 		particle.Play();
-//		WaitForSeconds(0.2f);
-		Instantiate(bot, transform.position, transform.rotation);
+		yield return new WaitForSeconds(0.2f);
+		Instantiate(bot, particle.transform.position, transform.rotation);
 		yield return 0;
 	}
 }
