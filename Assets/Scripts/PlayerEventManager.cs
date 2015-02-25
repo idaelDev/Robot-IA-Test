@@ -11,7 +11,7 @@ public class PlayerEventManager : MonoBehaviour {
 	public static event OnPose onPoseEvent;
 	public delegate void OnTargetExit();
 	public static event OnTargetExit onTargetExitEvent;
-	public float camRayLength = 5;  
+	public float camRayLength = 10;  
 
 
 	void Update()
@@ -20,7 +20,6 @@ public class PlayerEventManager : MonoBehaviour {
 		Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * camRayLength, Color.red);
 		// Create a RaycastHit variable to store information about what was hit by the ray.
 		RaycastHit hit;
-		// Perform the raycast and if it hits something on the floor layer...
 		if(Physics.Raycast (ray, out hit, camRayLength))
 		{
 			if(Input.GetKey(KeyCode.LeftShift) && Input.GetButtonDown("Fire1"))
@@ -54,12 +53,15 @@ public class PlayerEventManager : MonoBehaviour {
 
 	void TargetCondition(RaycastHit hit)
 	{
-		if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Floor"))
-		{
+        if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Floor"))
+        //if(true)
+        {
+            Debug.Log(hit.point);
 			onTargetEvent(hit.point);
 		}
 		else
 		{
+            //Debug.Log("TARGET OFF");
 			onTargetExitEvent();
 		}
 	}

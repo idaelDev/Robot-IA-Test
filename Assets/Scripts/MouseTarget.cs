@@ -26,8 +26,9 @@ public class MouseTarget : MonoBehaviour {
 	void Target(Vector3 position)
 	{
 		// Create a vector from the player to the point on the floor the raycast from the mouse hit.
-//				Vector3 position = new Vector3((int)(hit.point.x)+0.5f,(int) (hit.point.y)+0.5f,(int)(hit.point.z)-0.5f);
-		position = position + Vector3.up/2;
+//		Vector3 position = new Vector3((int)(hit.point.x)+0.5f,(int) (hit.point.y)+0.5f,(int)(hit.point.z)-0.5f);
+        //position = position + Vector3.up/2;
+        position = new Vector3((position.x), (position.y) + 0.5f, (position.z));
 		pTile.transform.position = position;
 //			pTile.transform.position = floorHit.point;
 		pTile.SetActive(true);
@@ -38,6 +39,4 @@ public class MouseTarget : MonoBehaviour {
 		Vector3 position = pTile.transform.position;
 		Instantiate(obj, position, Quaternion.identity);
 	}
-	
-
 }
