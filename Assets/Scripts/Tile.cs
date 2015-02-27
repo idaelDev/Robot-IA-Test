@@ -1,16 +1,34 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Tile : MonoBehaviour {
+public class Tile : MonoBehaviour 
+{
+	public Color col; 
+	private bool posable = true;
+    public bool choosen = false;
 
-	public bool choosen = false;
-	// Use this for initialization
-	void Start () {
-	
+	void OnTriggerStay(Collider other)
+	{
+		if(other.gameObject.layer != LayerMask.NameToLayer("Floor"))
+		{
+			posable = false;
+			gameObject.renderer.material.color = col ;
+		}
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	void OnTriggerExit(Collider other)
+	{
+		if(other.gameObject.layer != LayerMask.NameToLayer("Floor"))
+		{	posable = true;
+			gameObject.renderer.material.color = Color.white ;
+		}
+	}
+
+	public bool Posable
+	{
+		get
+		{
+			return posable;
+		}
 	}
 }
