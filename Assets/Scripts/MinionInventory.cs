@@ -15,6 +15,13 @@ public class MinionInventory : MonoBehaviour
         inventory = new Dictionary<string, int>();
     }
 
+    public int GetInventoryValue(string key)
+    {
+        int buf = 0;
+        inventory.TryGetValue(key, out buf);
+        return buf;
+    }
+
     public int AddResource(ResourceType type, int nb)
     {
         if (isFull)
@@ -31,9 +38,13 @@ public class MinionInventory : MonoBehaviour
         return taken;
     }
 
-    public void dropResource(ResourceType type, int nb)
+    public int dropResource(ResourceType type, int nb)
     {
+        int buf = nb;
+        if (charge - nb < 0)
+            buf = charge;
         InventoryOperation(type.ToString(), nb);
+        return buf;
     }
 
     private void UpdateCapacity()
