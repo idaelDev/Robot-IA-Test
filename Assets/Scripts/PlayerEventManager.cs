@@ -56,7 +56,7 @@ public class PlayerEventManager : MonoBehaviour {
         if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Floor"))
         //if(true)
         {
-            Debug.Log(hit.point);
+
 			onTargetEvent(hit.point);
 		}
 		else

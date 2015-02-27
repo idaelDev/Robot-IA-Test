@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Resource : MonoBehaviour
+public class Resource : Actor
 {
 
     public ResourceType type = ResourceType.ROCK;
@@ -29,6 +29,11 @@ public class Resource : MonoBehaviour
         {
             isMined = value;
         }
+    }
+
+    public override void DoAction(GameObject requester)
+    {
+        throw new System.NotImplementedException();
     }
 }
 

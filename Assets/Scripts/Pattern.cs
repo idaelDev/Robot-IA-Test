@@ -1,16 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Pattern : MonoBehaviour {
-
+public class Pattern : Actor
+{
+    
+    public GameObject obj;
 	public bool choosen = false;
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
+    public override void DoAction(GameObject requester)
+    {
+        Instantiate(obj, transform.position, transform.rotation);
+        Destroy(this.gameObject);
+    }
+
 }

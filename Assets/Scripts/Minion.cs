@@ -3,11 +3,11 @@ using System.Collections;
 
 public class Minion : MonoBehaviour {
 
-	public GameObject obj;
+
 	public float reloadTime = 1f;
 	private NavMeshAgent nav;
 	private bool occupied;
-	private GameObject target;
+	private Actor target;
 	private float time;
 
 	void Awake()
@@ -28,8 +28,7 @@ public class Minion : MonoBehaviour {
 		{
 			if(time >= reloadTime)
 			{
-				Instantiate(obj, target.transform.position, target.transform.rotation);
-				Destroy(target);
+                target.DoAction(this.gameObject);
 				occupied = false;
 				time = 0;
 			}
@@ -51,7 +50,7 @@ public class Minion : MonoBehaviour {
 					if(!targets[i].GetComponent<Pattern>().choosen)
 					{
 						minDistance = d;
-						target = targets[i];
+						target = targets[i].GetComponent<Actor>();
 					}
 				}
 			}
