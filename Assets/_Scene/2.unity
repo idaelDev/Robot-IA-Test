@@ -1523,7 +1523,7 @@ MonoBehaviour:
   choosen: 0
   type: 0
   initialQuantity: 100
-  timeToMine: 1
+  give: 10
 --- !u!1 &929362673
 GameObject:
   m_ObjectHideFlags: 0
