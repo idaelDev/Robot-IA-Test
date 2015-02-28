@@ -6,7 +6,7 @@ public class Resource : Actor
 
     public ResourceType type = ResourceType.ROCK;
     public int initialQuantity = 100;
-    public float timeToMine = 1f;
+    public int give = 10;
 
     private int quantity = 0;
     private bool isMined = false;
@@ -33,7 +33,7 @@ public class Resource : Actor
 
     public override void DoAction(GameObject requester)
     {
-        throw new System.NotImplementedException();
+        requester.GetComponent<MinionInventory>().AddResource(type, give);
     }
 }
 

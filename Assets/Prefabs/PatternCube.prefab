@@ -140,6 +140,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obj: {fileID: 103664, guid: f6dce2a15c4aa774699dbeef63ca28d1, type: 2}
   choosen: 0
+  type: 0
+  quantity: 10
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

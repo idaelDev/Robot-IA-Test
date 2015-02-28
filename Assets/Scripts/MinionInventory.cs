@@ -15,10 +15,10 @@ public class MinionInventory : MonoBehaviour
         inventory = new Dictionary<string, int>();
     }
 
-    public int GetInventoryValue(string key)
+    public int GetInventoryValue(ResourceType type)
     {
         int buf = 0;
-        inventory.TryGetValue(key, out buf);
+        inventory.TryGetValue(type.ToString(), out buf);
         return buf;
     }
 
@@ -38,12 +38,12 @@ public class MinionInventory : MonoBehaviour
         return taken;
     }
 
-    public int dropResource(ResourceType type, int nb)
+    public int DropResource(ResourceType type, int nb)
     {
         int buf = nb;
         if (charge - nb < 0)
             buf = charge;
-        InventoryOperation(type.ToString(), nb);
+        InventoryOperation(type.ToString(), -nb);
         return buf;
     }
 
@@ -54,6 +54,7 @@ public class MinionInventory : MonoBehaviour
         {
             charge += k;
         }
+        isFull = (charge >= maxCapacity);
     }
 
     private void InventoryOperation(string key, int toAdd)
@@ -61,8 +62,17 @@ public class MinionInventory : MonoBehaviour
         int buf = 0;
         inventory.TryGetValue(key,out buf);
         int sum = Mathf.Max(buf + toAdd, 0);
+        inventory.Remove(key);
         inventory.Add(key, sum);
         UpdateCapacity();
     }
 
+    public bool IsFull
+    {
+        get
+        {
+            UpdateCapacity();
+            return (charge >= maxCapacity);
+        }
+    }
 }
