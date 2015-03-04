@@ -1,0 +1,126 @@
+fileFormatVersion: 2
+guid: 0769042e5b642ad45bf5adec4a29a66c
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: AileDroite
+    100002: AileGauche
+    100004: Bec
+    100006: Bone Aile Droite
+    100008: Bone AileGauche
+    100010: Bone Centre
+    100012: Bone Jambe gauche
+    100014: Bone jambeDroite
+    100016: Bone004
+    100018: Bone006
+    100020: //RootNode
+    100022: Corps
+    100024: Crete
+    100026: JambeDroite
+    100028: JambeGauche
+    100030: OeilDroit
+    100032: OeilGauche
+    100034: PiedDroit
+    100036: PiedGauche
+    400000: AileDroite
+    400002: AileGauche
+    400004: Bec
+    400006: Bone Aile Droite
+    400008: Bone AileGauche
+    400010: Bone Centre
+    400012: Bone Jambe gauche
+    400014: Bone jambeDroite
+    400016: Bone004
+    400018: Bone006
+    400020: //RootNode
+    400022: Corps
+    400024: Crete
+    400026: JambeDroite
+    400028: JambeGauche
+    400030: OeilDroit
+    400032: OeilGauche
+    400034: PiedDroit
+    400036: PiedGauche
+    2300000: Bec
+    2300002: Corps
+    2300004: Crete
+    2300006: OeilDroit
+    2300008: OeilGauche
+    3300000: Bec
+    3300002: Corps
+    3300004: Crete
+    3300006: OeilDroit
+    3300008: OeilGauche
+    4300000: Corps
+    4300002: Bec
+    4300004: OeilGauche
+    4300006: OeilDroit
+    4300008: Crete
+    4300010: JambeGauche
+    4300012: JambeDroite
+    4300014: PiedDroit
+    4300016: AileGauche
+    4300018: AileDroite
+    4300020: PiedGauche
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: AileDroite
+    13700002: AileGauche
+    13700004: JambeDroite
+    13700006: JambeGauche
+    13700008: PiedDroit
+    13700010: PiedGauche
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
