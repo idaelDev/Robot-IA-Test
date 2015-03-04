@@ -6,7 +6,7 @@ public class ImprovedMinion : MonoBehaviour {
 
     public float actionDist = 1.5f;
     public float delay = 2f;
-    public State defaultState = State.WAIT;
+    public State defaultState = State.BUILD;
     public State currentState;
     private NavMeshAgent nav;
     GameObject target;
@@ -45,73 +45,68 @@ public class ImprovedMinion : MonoBehaviour {
                 case State.TAKE:
                     Take();
                     break;
-                case State.WAIT:
-                    Wait();
-                    break;
-            
             }
             timer = 0;
         }
     }
 
-    void Wait()
+    void Build()
     {
         target = FindNearest("Pattern");
         if (target != null)
         {
-            Debug.Log("Attente : Objectif definit");
-            currentState = State.BUILD;
-            Debug.Log("Attente -> Construction");
-        }
-    }
-
-    void Build()
-    {
-        Pattern p = target.GetComponent<Pattern>();
-        p.choosen = true;
-        if (inventory.GetInventoryValue(p.type) < p.quantity)
-        {
-            Debug.Log("Construction : Pas assez de ressource");
-            currentMining = p.type;
-            currentNeed = p.quantity;
-            currentState = State.TAKE;
-            Debug.Log("Construction -> Prendre");
-        }
-        else
-        {
-            Debug.Log("Construction : Deplacement");
-            nav.destination = target.transform.position;
-            if (Vector3.Distance(transform.position, nav.destination) <= actionDist)
+            Pattern p = target.GetComponent<Pattern>();
+            p.choosen = true;
+            if (inventory.GetInventoryValue(p.type) < p.quantity)
             {
-                Debug.Log("Construction : Construction");
-                p.DoAction(this.gameObject);
-                currentState = defaultState;
-                Debug.Log("Construction -> Attente");
+                Debug.Log("Construction : Pas assez de ressource");
+                currentMining = p.type;
+                currentNeed = p.quantity;
+                currentState = State.TAKE;
+                Debug.Log("Construction -> Prendre");
+            }
+            else
+            {
+                Debug.Log("Construction : Deplacement");
+                nav.destination = target.transform.position;
+                if (Vector3.Distance(transform.position, nav.destination) <= actionDist)
+                {
+                    Debug.Log("Construction : Construction");
+                    p.DoAction(this.gameObject);
+                    currentState = defaultState;
+                    Debug.Log("Construction -> Attente");
+                }
             }
         }
     }
 
     void Take()
     {
-        nav.destination = chestPosition;
-        if(Vector3.Distance(transform.position, nav.destination) <= actionDist)
+        if (chest.GetInventoryValue(currentMining) > 0)
         {
-            Debug.Log("Prendre : Recherche dans le coffre");
-            int c = chest.DropResource(currentMining, currentNeed);
-            inventory.AddResource(currentMining, c);
-            if(inventory.GetInventoryValue(currentMining) < currentNeed)
+            nav.destination = chestPosition;
+            if (Vector3.Distance(transform.position, nav.destination) <= actionDist)
             {
-                Debug.Log("Prendre : Pas assez de ressources dans le coffre");
-                currentState = State.MINE;
-                Debug.Log("Prendre -> Minage");
+                Debug.Log("Prendre : Recherche dans le coffre");
+                int c = chest.DropResource(currentMining, inventory.maxCapacity);
+                chest.AddResource(currentMining, c - inventory.AddResource(currentMining, c));
+                if (inventory.GetInventoryValue(currentMining) < currentNeed)
+                {
+                    if (inventory.IsFull)
+                    {
+                        Debug.Log("Prendre : Inventaire plein");
+                        currentState = State.POSE;
+                        Debug.Log("Prendre -> Poser");
+                    }
+                }
             }
-            if(inventory.IsFull)
-            {
-                Debug.Log("Prendre : Inventaire plein");
-                currentState = State.POSE;
-                Debug.Log("Prendre -> Poser");
-            }
-        }   
+        }
+        else
+        {
+            Debug.Log("Prendre : Pas assez de ressources dans le coffre");
+            currentState = State.MINE;
+            Debug.Log("Prendre -> Minage");
+        }
     }
 
     void Pose()
@@ -196,5 +191,4 @@ public enum State
     MINE,
     POSE,
     TAKE,
-    WAIT
 }
