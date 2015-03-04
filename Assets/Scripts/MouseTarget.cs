@@ -7,6 +7,8 @@ public class MouseTarget : MonoBehaviour {
 	public GameObject obj;
 	public GameObject tile;
 	private GameObject pTile;
+    public delegate void OnPoseEnd();
+    public static event OnPoseEnd onPoseEndEvent;
 
 	// Use this for initialization
 	void Start () {
@@ -38,5 +40,6 @@ public class MouseTarget : MonoBehaviour {
 	{
 		Vector3 position = pTile.transform.position;
 		Instantiate(obj, position, Quaternion.identity);
+        onPoseEndEvent();
 	}
 }

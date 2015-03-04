@@ -179,6 +179,8 @@ public class ImprovedMinion : MonoBehaviour {
                 {
                     if (!targets[i].GetComponent<Actor>().choosen)
                     {
+                        if(r != null)
+                            r.GetComponent<Actor>().choosen = false;
                         targets[i].GetComponent<Actor>().choosen = true;
                         minDistance = d;
                         r = targets[i];
@@ -190,11 +192,11 @@ public class ImprovedMinion : MonoBehaviour {
     }
 }
 
-public enum State
-{
-    BUILD,
-    MINE,
-    POSE,
-    TAKE,
-    WAIT
-}
+//public enum State
+//{
+//    BUILD,
+//    MINE,
+//    POSE,
+//    TAKE,
+//    WAIT
+//}

@@ -11,6 +11,8 @@ public class PlayerEventManager : MonoBehaviour {
 	public static event OnPose onPoseEvent;
 	public delegate void OnTargetExit();
 	public static event OnTargetExit onTargetExitEvent;
+    public delegate void OnMinionTarget(GameObject minion);
+    public static event OnMinionTarget OnMinionTargetEvent;
 	public float camRayLength = 10;  
 
 
@@ -49,6 +51,8 @@ public class PlayerEventManager : MonoBehaviour {
 	{
 		if(hit.collider.gameObject.tag == "Button")
 			onButtonEvent();
+        if (hit.collider.gameObject.tag == "Minion")
+            OnMinionTargetEvent(hit.collider.gameObject);
 	}
 
 	void TargetCondition(RaycastHit hit)

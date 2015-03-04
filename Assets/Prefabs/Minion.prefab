@@ -15,9 +15,10 @@ GameObject:
   - 195: {fileID: 19572722}
   - 114: {fileID: 11472722}
   - 114: {fileID: 11485868}
+  - 114: {fileID: 11492302}
   m_Layer: 0
-  m_Name: Mignon
-  m_TagString: Untagged
+  m_Name: Minion
+  m_TagString: Minion
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -94,7 +95,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 181136}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe6abd8e5d5228642bc345378e80f79a, type: 3}
   m_Name: 
@@ -112,6 +113,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxCapacity: 100
+--- !u!114 &11492302
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 181136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ded8c235138c47547b1e0df9a0139c05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionDist: 1.5
+  delay: 2
+  defaultState: 0
+  currentState: 0
+  currentNeed: 0
+  chest: {fileID: 0}
 --- !u!195 &19572722
 NavMeshAgent:
   m_ObjectHideFlags: 1

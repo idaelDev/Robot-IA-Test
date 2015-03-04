@@ -5,7 +5,8 @@ using System.Collections.Generic;
 public class MinionInventory : MonoBehaviour
 {
     public int maxCapacity = 100;
-
+    public int startRockValue = 0;
+    public int[] invent;
     private int charge = 0;
     private bool isFull = false;
     private Dictionary<string, int> inventory;
@@ -13,6 +14,18 @@ public class MinionInventory : MonoBehaviour
     void Awake()
     {
         inventory = new Dictionary<string, int>();
+        AddResource(ResourceType.ROCK, startRockValue);
+    }
+
+    void Update()
+    {
+        invent = new int[4];
+        int i=0;
+        foreach(int a in inventory.Values)
+        {
+            invent[i] = a;
+            i++;
+        }
     }
 
     public int GetInventoryValue(ResourceType type)

@@ -5,10 +5,12 @@ TagManager:
   tags:
   - 
   - Pattern
-  - Wood
+  - WATER
   - Button
   - ROCK
   - Chest
+  - Minion
+  - WOOD
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
