@@ -42,6 +42,7 @@ public class ImprovedMinionV2 : MonoBehaviour
         timer += Time.deltaTime;
         if (timer > delay)
         {
+            Debug.Log("Current State : " + currentState + " Default State : " + defaultState);
             switch (currentState)
             {
                 case State.BUILD:
@@ -62,6 +63,19 @@ public class ImprovedMinionV2 : MonoBehaviour
             }
             timer = 0;
         }
+    }
+
+    public void SetToBuilder()
+    {
+        defaultState = State.BUILD;
+        currentState = State.BUILD;
+    }
+
+    public void SetToMiner(ResourceType type)
+    {
+        currentMining = type;
+        defaultState = State.MINE;
+        currentState = State.POSE;
     }
 
     void Build()

@@ -13,7 +13,6 @@ GameObject:
   - 23: {fileID: 2381136}
   - 54: {fileID: 5481136}
   - 195: {fileID: 19572722}
-  - 114: {fileID: 11472722}
   - 114: {fileID: 11485868}
   - 114: {fileID: 11492302}
   m_Layer: 0
@@ -30,7 +29,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 181136}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 31.1700001, y: 1.39999998, z: 33.8300018}
+  m_LocalPosition: {x: 37.7000008, y: 1.39999998, z: 56.9000015}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -89,18 +88,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &11472722
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 181136}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe6abd8e5d5228642bc345378e80f79a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  reloadTime: 1
 --- !u!114 &11485868
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -113,6 +100,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxCapacity: 100
+  startRockValue: 0
+  invent: 
 --- !u!114 &11492302
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -126,8 +115,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionDist: 1.5
   delay: 2
-  defaultState: 0
-  currentState: 0
+  defaultState: 1
+  currentState: 1
+  currentMining: 3
   currentNeed: 0
   chest: {fileID: 0}
 --- !u!195 &19572722
