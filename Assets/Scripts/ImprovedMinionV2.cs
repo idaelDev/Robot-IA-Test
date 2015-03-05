@@ -91,7 +91,7 @@ public class ImprovedMinionV2 : MonoBehaviour
             {
                 Debug.Log("BUILD : Can Construct");
                 nav.destination = targetPattern.transform.position;
-                if(Vector3.Distance(transform.position, nav.destination) <= actionDist)
+                if(Vector2.Distance(transform.position, nav.destination) <= actionDist)
                 {
                     Debug.Log("BUILD : Construction");
                     targetPattern.DoAction(gameObject);
@@ -115,7 +115,7 @@ public class ImprovedMinionV2 : MonoBehaviour
     void Take()
     {
         nav.destination = chestPosition;
-        if (Vector3.Distance(transform.position, nav.destination) <= actionDist)
+        if (Vector2.Distance(transform.position, nav.destination) <= actionDist)
         {
             Debug.Log("TAKE : Look in the chest");
             int c = chest.DropResource(currentMining, inventory.maxCapacity);
@@ -140,7 +140,7 @@ public class ImprovedMinionV2 : MonoBehaviour
     void Pose()
     {
         nav.destination = chest.gameObject.transform.position;
-        if (Vector3.Distance(transform.position, nav.destination) <= actionDist)
+        if (Vector2.Distance(transform.position, nav.destination) <= actionDist)
         {
             Debug.Log("POSE : drop in the chest");
             chest.AddResource(ResourceType.MEAT, inventory.DropResource(ResourceType.MEAT,inventory.GetInventoryValue(ResourceType.MEAT)));
@@ -162,7 +162,7 @@ public class ImprovedMinionV2 : MonoBehaviour
         else
         {
             nav.destination = resourceSpot.transform.position;
-            if (Vector3.Distance(transform.position, nav.destination) <= actionDist)
+            if (Vector2.Distance(transform.position, nav.destination) <= actionDist)
             {
                 if (inventory.IsFull)
                 {
@@ -188,7 +188,7 @@ public class ImprovedMinionV2 : MonoBehaviour
         {
             for (int i = 0; i < targets.Length; i++)
             {
-                float d = Vector3.Distance(targets[i].transform.position, transform.position);
+                float d = Vector2.Distance(targets[i].transform.position, transform.position);
                 if (d < minDistance)
                 {
                     minDistance = d;
@@ -207,13 +207,13 @@ public class ImprovedMinionV2 : MonoBehaviour
     void SelectTargetPattern()
     {
         float minD = 10000f;
-        Pattern constructible = null;
+        //Pattern constructible = null;
         Pattern near = null;
         for(int i=0; i<patterns.Count; i++)
         {
             if(!patterns[i].choosen && patterns[i] != oldPattern)
             {
-                float d = Vector3.Distance(patterns[i].transform.position, transform.position);
+                float d = Vector2.Distance(patterns[i].transform.position, transform.position);
                 //if(canConstruct(patterns[i]))
                 //{
                 //    if(d < minD || constructible == null)

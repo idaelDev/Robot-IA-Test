@@ -4,21 +4,45 @@ using System.Collections;
 public class MouseTarget : MonoBehaviour {
 
 
-	public GameObject obj;
-	public GameObject tile;
+	public GameObject[] obj;
+	public GameObject[] tile;
 	private GameObject pTile;
+    private int index;
     public delegate void OnPoseEnd();
     public static event OnPoseEnd onPoseEndEvent;
 
 	// Use this for initialization
 	void Start () {
-		pTile = Instantiate(tile) as GameObject;
-		pTile.transform.Rotate(new Vector3(90,0,0));
-		pTile.SetActive(false);
+        index = 0;
+        InstantiatePTile();
 		PlayerEventManager.onTargetEvent += Target;
 		PlayerEventManager.onPoseEvent += InstantiatePattern;
 		PlayerEventManager.onTargetExitEvent += TargetExit;
+        PlayerEventManager.OnChangeBlockTypeEvent += IncrementIndex;
 	}
+
+    void IncrementIndex()
+    {
+        index++;
+        if (index >= obj.Length)
+            index = 0;
+        Destroy(pTile);
+        InstantiatePTile();
+    }
+
+    void DecrementIndex()
+    {
+        index--;
+        if (index < 0)
+            index = obj.Length-1;
+    }
+
+    void InstantiatePTile()
+    {
+        pTile = Instantiate(tile[index]) as GameObject;
+        pTile.transform.Rotate(new Vector3(90, 0, 0));
+        pTile.SetActive(false);
+    }
 
 	void TargetExit()
 	{
@@ -39,7 +63,7 @@ public class MouseTarget : MonoBehaviour {
 	void InstantiatePattern()
 	{
 		Vector3 position = pTile.transform.position;
-		Instantiate(obj, position, Quaternion.identity);
+		Instantiate(obj[index], position, Quaternion.identity);
         onPoseEndEvent();
 	}
 }

@@ -26,6 +26,7 @@ public class InterfaceManager : MonoBehaviour {
         mouseX.enabled = false;
         mouseY.enabled = false;
         control.enabled = false;
+        //menu.gameObject.GetComponent<AudioSource>().Play();
         menu.enabled = true;
     }
 
