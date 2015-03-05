@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 
 public class ImprovedMinionV2 : MonoBehaviour
@@ -23,9 +24,15 @@ public class ImprovedMinionV2 : MonoBehaviour
     private List<Pattern> patterns;
     public delegate void OnBlockBuilt();
     public static event OnBlockBuilt onBlockBuiltEvent;
+    public Canvas canvas;
+    Text UIText;
+
 
     void Start()
     {
+        canvas = GetComponentInChildren<Canvas>();
+        UIText = canvas.GetComponentInChildren<Text>();
+        UIText.text = "Initialisation...";
         nav = GetComponent<NavMeshAgent>();
         inventory = gameObject.GetComponent<MinionInventory>();
         chest = GameObject.FindGameObjectWithTag("Chest").GetComponent<MinionInventory>();
@@ -37,6 +44,7 @@ public class ImprovedMinionV2 : MonoBehaviour
 
     void Update()
     {
+        canvas.gameObject.transform.LookAt(Camera.main.transform);
         if (targetPattern != null)
             Debug.DrawLine(transform.position, targetPattern.transform.position);
         timer += Time.deltaTime;
@@ -75,35 +83,35 @@ public class ImprovedMinionV2 : MonoBehaviour
     {
         currentMining = type;
         defaultState = State.MINE;
-        currentState = State.POSE;
+        currentState = State.MINE;
     }
 
     void Build()
     {
         if(targetPattern == null)
         {
-            Debug.Log("BUILD : Select target");
+            UIText.text = "Searching...";
             SelectTargetPattern();
         }
         else
         {
             if(canConstruct(targetPattern))
             {
-                Debug.Log("BUILD : Can Construct");
+                UIText.text = "Moving...";
                 nav.destination = targetPattern.transform.position;
                 if(Vector2.Distance(transform.position, nav.destination) <= actionDist)
                 {
-                    Debug.Log("BUILD : Construction");
+                    UIText.text = "Construction !";
                     targetPattern.DoAction(gameObject);
                     oldPattern = targetPattern;
                     targetPattern = null;
                     onBlockBuiltEvent();
-                    Debug.Log("BUILD : Construction End");
+                    Debug.Log("Construction End");
                 }
             }
             else
             {
-                Debug.Log("BUILD : Not enought material");
+                UIText.text = "Not enought material";
                 currentMining = targetPattern.type;
                 currentNeed = targetPattern.quantity;
                 currentState = State.TAKE;
@@ -117,12 +125,12 @@ public class ImprovedMinionV2 : MonoBehaviour
         nav.destination = chestPosition;
         if (Vector2.Distance(transform.position, nav.destination) <= actionDist)
         {
-            Debug.Log("TAKE : Look in the chest");
+            UIText.text = "Looking for resources...";
             int c = chest.DropResource(currentMining, inventory.maxCapacity);
             chest.AddResource(currentMining, inventory.AddResource(currentMining, c));
             if (inventory.GetInventoryValue(currentMining) >= currentNeed)
             {
-                Debug.Log("TAKE : Not enought material in the chest");
+                UIText.text = "FAIL : not enought material";
                 targetPattern.choosen = false;
                 oldPattern = targetPattern;
                 currentState = defaultState;
@@ -130,7 +138,7 @@ public class ImprovedMinionV2 : MonoBehaviour
             }
             else
             {
-                Debug.Log("TAKE : Full inventory");
+                UIText.text = "Can't carry more material";
                 currentState = State.POSE;
                 Debug.Log("TAKE -> POSE");
             }
@@ -139,10 +147,11 @@ public class ImprovedMinionV2 : MonoBehaviour
 
     void Pose()
     {
+        UIText.text = "Moving to the chest...";
         nav.destination = chest.gameObject.transform.position;
         if (Vector2.Distance(transform.position, nav.destination) <= actionDist)
         {
-            Debug.Log("POSE : drop in the chest");
+            UIText.text = "Cleaning inventory";
             chest.AddResource(ResourceType.MEAT, inventory.DropResource(ResourceType.MEAT,inventory.GetInventoryValue(ResourceType.MEAT)));
             chest.AddResource(ResourceType.ROCK, inventory.DropResource(ResourceType.ROCK, inventory.GetInventoryValue(ResourceType.ROCK)));
             chest.AddResource(ResourceType.WATER, inventory.DropResource(ResourceType.WATER, inventory.GetInventoryValue(ResourceType.WATER)));
@@ -156,23 +165,24 @@ public class ImprovedMinionV2 : MonoBehaviour
     {
         if (resourceSpot == null || resourceSpot.type != currentMining)
         {
-            Debug.Log("MINE : Looking for spot");
+            UIText.text = "Looking for resources";
             resourceSpot = SelectRessourceSpot();
         }
         else
         {
+            UIText.text = "Moving...";
             nav.destination = resourceSpot.transform.position;
             if (Vector2.Distance(transform.position, nav.destination) <= actionDist)
             {
                 if (inventory.IsFull)
                 {
-                    Debug.Log("MINE : full inventory");
+                    UIText.text = "Can't carry more material";
                     currentState = State.POSE;
                     Debug.Log("Minage -> Poser");
                 }
                 else
                 {
-                    Debug.Log("MINE : in progress...");
+                    UIText.text = "Recuperation in progress...";
                     resourceSpot.GetComponent<Actor>().DoAction(this.gameObject);
                 }
             }
@@ -207,12 +217,14 @@ public class ImprovedMinionV2 : MonoBehaviour
     void SelectTargetPattern()
     {
         float minD = 10000f;
+        
         //Pattern constructible = null;
         Pattern near = null;
         for(int i=0; i<patterns.Count; i++)
         {
-            if(!patterns[i].choosen && patterns[i] != oldPattern)
+            if(!patterns[i].choosen &&  (oldPattern == null || patterns[i] != oldPattern))
             {
+
                 float d = Vector2.Distance(patterns[i].transform.position, transform.position);
                 //if(canConstruct(patterns[i]))
                 //{

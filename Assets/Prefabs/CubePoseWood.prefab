@@ -14,7 +14,7 @@ GameObject:
   - 208: {fileID: 20897894}
   - 54: {fileID: 5446320}
   - 82: {fileID: 8201890}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CubePoseWood
   m_TagString: Untagged
   m_Icon: {fileID: 0}

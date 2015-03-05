@@ -17,16 +17,6 @@ public class MinionInventory : MonoBehaviour
         AddResource(ResourceType.ROCK, startRockValue);
     }
 
-    void Update()
-    {
-        invent = new int[4];
-        int i=0;
-        foreach(int a in inventory.Values)
-        {
-            invent[i] = a;
-            i++;
-        }
-    }
 
     public int GetInventoryValue(ResourceType type)
     {
