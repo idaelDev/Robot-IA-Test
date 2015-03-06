@@ -26,10 +26,12 @@ public class ImprovedMinionV2 : MonoBehaviour
     public static event OnBlockBuilt onBlockBuiltEvent;
     public Canvas canvas;
     Text UIText;
+    public Animator anim;  
 
 
     void Start()
     {
+        anim = GetComponentInChildren<Animator>();
         canvas = GetComponentInChildren<Canvas>();
         UIText = canvas.GetComponentInChildren<Text>();
         UIText.text = "Initialisation...";
@@ -102,6 +104,7 @@ public class ImprovedMinionV2 : MonoBehaviour
                 if(Vector2.Distance(transform.position, nav.destination) <= actionDist)
                 {
                     UIText.text = "Construction !";
+                    anim.SetTrigger("Action");
                     targetPattern.DoAction(gameObject);
                     oldPattern = targetPattern;
                     targetPattern = null;
@@ -126,6 +129,7 @@ public class ImprovedMinionV2 : MonoBehaviour
         if (Vector2.Distance(transform.position, nav.destination) <= actionDist)
         {
             UIText.text = "Looking for resources...";
+            anim.SetTrigger("Action");
             int c = chest.DropResource(currentMining, inventory.maxCapacity);
             chest.AddResource(currentMining, inventory.AddResource(currentMining, c));
             if (inventory.GetInventoryValue(currentMining) >= currentNeed)
@@ -151,6 +155,7 @@ public class ImprovedMinionV2 : MonoBehaviour
         nav.destination = chest.gameObject.transform.position;
         if (Vector2.Distance(transform.position, nav.destination) <= actionDist)
         {
+            anim.SetTrigger("Action");
             UIText.text = "Cleaning inventory";
             chest.AddResource(ResourceType.MEAT, inventory.DropResource(ResourceType.MEAT,inventory.GetInventoryValue(ResourceType.MEAT)));
             chest.AddResource(ResourceType.ROCK, inventory.DropResource(ResourceType.ROCK, inventory.GetInventoryValue(ResourceType.ROCK)));
@@ -182,7 +187,8 @@ public class ImprovedMinionV2 : MonoBehaviour
                 }
                 else
                 {
-                    UIText.text = "Recuperation in progress...";
+                    UIText.text = "Extraction in progress...";
+                    anim.SetTrigger("Action");
                     resourceSpot.GetComponent<Actor>().DoAction(this.gameObject);
                 }
             }

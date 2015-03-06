@@ -1,0 +1,147 @@
+fileFormatVersion: 2
+guid: 1586725984837c44f844ad2e4ef932e6
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: Base
+    100002: Bone Bras Droit
+    100004: Bone bras Gauche
+    100006: Bone Main Droit
+    100008: Bone main gauche
+    100010: Bras Droit
+    100012: Bras Gauche
+    100014: Main droite
+    100016: Main Gauche
+    100018: Oeil Gauche
+    100020: Oeuil droit
+    100022: //RootNode
+    100024: Roue Droite Arriere
+    100026: Roue Droite Avant
+    100028: Roue Droite Centre
+    100030: Roue Gauche Arriere
+    100032: Roue Gauche Avant
+    100034: Roue Gauche Centre
+    100036: Support Bras
+    100038: Tete
+    100040: Tronc
+    400000: Base
+    400002: Bone Bras Droit
+    400004: Bone bras Gauche
+    400006: Bone Main Droit
+    400008: Bone main gauche
+    400010: Bras Droit
+    400012: Bras Gauche
+    400014: Main droite
+    400016: Main Gauche
+    400018: Oeil Gauche
+    400020: Oeuil droit
+    400022: //RootNode
+    400024: Roue Droite Arriere
+    400026: Roue Droite Avant
+    400028: Roue Droite Centre
+    400030: Roue Gauche Arriere
+    400032: Roue Gauche Avant
+    400034: Roue Gauche Centre
+    400036: Support Bras
+    400038: Tete
+    400040: Tronc
+    2300000: Base
+    2300002: Oeil Gauche
+    2300004: Oeuil droit
+    2300006: Roue Droite Arriere
+    2300008: Roue Droite Avant
+    2300010: Roue Droite Centre
+    2300012: Roue Gauche Arriere
+    2300014: Roue Gauche Avant
+    2300016: Roue Gauche Centre
+    2300018: Support Bras
+    2300020: Tete
+    2300022: Tronc
+    3300000: Base
+    3300002: Oeil Gauche
+    3300004: Oeuil droit
+    3300006: Roue Droite Arriere
+    3300008: Roue Droite Avant
+    3300010: Roue Droite Centre
+    3300012: Roue Gauche Arriere
+    3300014: Roue Gauche Avant
+    3300016: Roue Gauche Centre
+    3300018: Support Bras
+    3300020: Tete
+    3300022: Tronc
+    4300000: Base
+    4300002: Roue Droite Centre
+    4300004: Roue Gauche Centre
+    4300006: Roue Droite Avant
+    4300008: Roue Gauche Avant
+    4300010: Roue Droite Arriere
+    4300012: Roue Gauche Arriere
+    4300014: Tronc
+    4300016: Support Bras
+    4300018: Bras Droit
+    4300020: Main droite
+    4300022: Main Gauche
+    4300024: Bras Gauche
+    4300026: Tete
+    4300028: Oeil Gauche
+    4300030: Oeuil droit
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: Bras Droit
+    13700002: Bras Gauche
+    13700004: Main droite
+    13700006: Main Gauche
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
