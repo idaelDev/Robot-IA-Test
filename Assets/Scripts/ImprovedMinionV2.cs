@@ -228,7 +228,7 @@ public class ImprovedMinionV2 : MonoBehaviour
         Pattern near = null;
         for(int i=0; i<patterns.Count; i++)
         {
-            if(!patterns[i].choosen &&  patterns[i] != oldPattern)
+            if(!patterns[i].choosen &&  (oldPattern == null || patterns[i] != oldPattern))
             {
 
                 float d = Vector2.Distance(patterns[i].transform.position, transform.position);
