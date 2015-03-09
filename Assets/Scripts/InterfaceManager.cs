@@ -42,7 +42,7 @@ public class InterfaceManager : MonoBehaviour {
     void ActiveMenu(GameObject target)
     {
         MinionInventory inv = target.GetComponent<MinionInventory>();
-        textMinionRock.text =""+ inv.GetInventoryValue(ResourceType.ROCK);
+    
         textMinionWood.text = "" + inv.GetInventoryValue(ResourceType.WOOD);
         textMinionMeat.text = "" + inv.GetInventoryValue(ResourceType.MEAT);
         textMinionWater.text = "" + inv.GetInventoryValue(ResourceType.WATER);

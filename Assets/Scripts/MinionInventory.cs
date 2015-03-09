@@ -6,6 +6,9 @@ public class MinionInventory : MonoBehaviour
 {
     public int maxCapacity = 100;
     public int startRockValue = 0;
+    public int startWoodValue = 0;
+    public int startMeatValue = 0;
+    public int startWaterValue = 0; 
     public int[] invent;
     private int charge = 0;
     private bool isFull = false;
@@ -15,6 +18,9 @@ public class MinionInventory : MonoBehaviour
     {
         inventory = new Dictionary<string, int>();
         AddResource(ResourceType.ROCK, startRockValue);
+        AddResource(ResourceType.WOOD, startWoodValue);
+        AddResource(ResourceType.WATER, startWaterValue);
+        AddResource(ResourceType.MEAT, startMeatValue);
     }
 
 
